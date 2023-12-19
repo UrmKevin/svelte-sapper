@@ -5,11 +5,12 @@
         }
     }
 </script>
+
 <script>
     import { goto, stores } from '@sapper/app';
     import { post } from 'utils.js';
-    const { session } = stores();
 
+    const { session } = stores();
     let username = '';
     let password = '';
     let error = null;
@@ -17,10 +18,9 @@
     async function submit(event) {
         const response = await post(`auth/login`, { username, password });
         error = response.error;
-        console.log(response);
         if (response.token) {
             $session.token = response.token;
-            goto('/');
+            goto('/overview');
         }
     }
 </script>
